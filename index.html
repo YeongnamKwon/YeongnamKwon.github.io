@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youngman Kwon — Developer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --ink2: #3a3a3a;
+    --ink3: #7a7a7a;
+    --paper: #f5f2ed;
+    --paper2: #edeae4;
+    --paper3: #e3dfd7;
+    --accent: #1a3a6b;
+    --accent2: #2d5ca8;
+    --accent-light: #d6e4f7;
+    --green: #1a4a2e;
+    --green-light: #d4edd9;
+    --amber: #7a4a00;
+    --amber-light: #faebd0;
+    --mono: 'DM Mono', monospace;
+    --serif: 'DM Serif Display', serif;
+    --sans: 'Outfit', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(245,242,237,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--paper3);
+  }
+  .nav-logo { font-family: var(--mono); font-size: 13px; color: var(--ink2); letter-spacing: 0.08em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 13px; color: var(--ink2); text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent2); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -40%; right: -15%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(45,92,168,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center; max-width: 1100px; margin: 0 auto; width: 100%;
+  }
+  .hero-text {}
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    color: var(--accent2); background: var(--accent-light);
+    padding: 5px 12px; border-radius: 20px; margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  h1 em { font-style: italic; color: var(--accent2); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--ink2); margin: 1.5rem 0 2rem;
+    max-width: 420px; font-weight: 300; line-height: 1.8;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    font-family: var(--sans); font-size: 13px; font-weight: 500;
+    padding: 10px 24px; border-radius: 6px;
+    text-decoration: none; transition: all 0.2s; cursor: pointer;
+    letter-spacing: 0.03em;
+  }
+  .btn-primary { background: var(--accent); color: #fff; border: 1.5px solid var(--accent); }
+  .btn-primary:hover { background: var(--accent2); border-color: var(--accent2); }
+  .btn-outline { background: transparent; color: var(--ink); border: 1.5px solid var(--paper3); }
+  .btn-outline:hover { border-color: var(--ink2); }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  }
+  .stat-box {
+    background: var(--paper2); border: 1px solid var(--paper3);
+    border-radius: 12px; padding: 1.5rem 1rem; text-align: center;
+  }
+  .stat-num { font-family: var(--mono); font-size: 2rem; font-weight: 500; color: var(--accent); display: block; }
+  .stat-label { font-size: 11px; letter-spacing: 0.08em; color: var(--ink3); text-transform: uppercase; margin-top: 4px; }
+
+  /* SECTION */
+  section { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.15em;
+    color: var(--ink3); text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2; color: var(--ink); margin-bottom: 3rem;
+  }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+  .skill-card {
+    background: var(--paper2); border: 1px solid var(--paper3);
+    border-radius: 12px; padding: 1.5rem;
+  }
+  .skill-card-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem; font-size: 18px;
+  }
+  .icon-blue { background: var(--accent-light); color: var(--accent2); }
+  .icon-green { background: var(--green-light); color: var(--green); }
+  .icon-amber { background: var(--amber-light); color: var(--amber); }
+  .skill-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 0.75rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: var(--mono); font-size: 11px; padding: 3px 8px;
+    border-radius: 4px; background: var(--paper); border: 1px solid var(--paper3);
+    color: var(--ink2);
+  }
+
+  /* PROJECTS */
+  .projects-list { display: flex; flex-direction: column; gap: 2rem; }
+  .project-card {
+    background: var(--paper2); border: 1px solid var(--paper3);
+    border-radius: 16px; padding: 2rem 2.5rem;
+    display: grid; grid-template-columns: 1fr auto;
+    gap: 1.5rem; align-items: start;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .project-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
+  .project-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem; flex-wrap: wrap; }
+  .project-badge {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+    padding: 3px 10px; border-radius: 20px; text-transform: uppercase;
+  }
+  .badge-main { background: var(--accent-light); color: var(--accent); }
+  .badge-course { background: var(--green-light); color: var(--green); }
+  .badge-hw { background: var(--amber-light); color: var(--amber); }
+  .project-card h3 { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .project-card p { font-size: 14px; color: var(--ink2); line-height: 1.7; margin-bottom: 1rem; }
+  .project-tech { display: flex; gap: 6px; flex-wrap: wrap; }
+  .project-links { display: flex; flex-direction: column; gap: 8px; }
+  .project-link {
+    font-family: var(--mono); font-size: 11px; padding: 6px 14px;
+    border: 1px solid var(--paper3); border-radius: 6px;
+    text-decoration: none; color: var(--ink2); text-align: center;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .project-link:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  /* EXPERIENCE TIMELINE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 0;
+    width: 1px; background: var(--paper3);
+  }
+  .timeline-item { position: relative; margin-bottom: 2.5rem; }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -2.4rem; top: 8px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent2); border: 2px solid var(--paper);
+  }
+  .timeline-date { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.08em; margin-bottom: 4px; }
+  .timeline-item h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .timeline-item p { font-size: 14px; color: var(--ink2); }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--ink); color: #fff;
+    padding: 6rem 3rem; text-align: center;
+  }
+  .contact-section .section-label { color: rgba(255,255,255,0.4); }
+  .contact-section h2 { color: #fff; margin-bottom: 1rem; }
+  .contact-section p { color: rgba(255,255,255,0.6); max-width: 480px; margin: 0 auto 2.5rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-link {
+    font-family: var(--mono); font-size: 13px; padding: 10px 24px;
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 6px;
+    text-decoration: none; color: #fff; transition: all 0.2s;
+  }
+  .contact-link:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); }
+
+  /* FOOTER */
+  footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.08); padding: 1.5rem 3rem; }
+  footer p { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.3); text-align: center; letter-spacing: 0.06em; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .project-card { grid-template-columns: 1fr; }
+    .contact-section { padding: 4rem 1.5rem; }
+    footer { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">YK.DEV</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="about">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="hero-tag">Computer Science · Sophomore</div>
+      <h1>Kwon<br><em>Youngman</em></h1>
+      <p class="hero-sub">
+        백엔드 개발과 오픈소스에 관심을 가진 컴퓨터공학과 학생입니다.
+        사용자에게 실질적인 가치를 주는 소프트웨어를 만들고 싶습니다.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+        <a href="https://github.com/YeongnamKwon" class="btn btn-outline" target="_blank">GitHub →</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-box">
+        <span class="stat-num">2+</span>
+        <span class="stat-label">Years<br>Coding</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">5+</span>
+        <span class="stat-label">Projects<br>Completed</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num">Java</span>
+        <span class="stat-label">Main<br>Language</span>
+      </div>
+      <div class="stat-box" style="grid-column: span 3;">
+        <span style="font-family: var(--mono); font-size: 12px; color: var(--ink3); letter-spacing: 0.06em;">
+          🎓 오픈소스소프트웨어기초 (COM20925) · Team Leader
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">What I work with</p>
+  <h2>기술 스택</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-icon icon-blue">☕</div>
+      <h3>Backend</h3>
+      <div class="skill-tags">
+        <span class="tag">Java</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">Gradle</span>
+        <span class="tag">Thymeleaf</span>
+        <span class="tag">REST API</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon icon-green">🖥️</div>
+      <h3>System / OS</h3>
+      <div class="skill-tags">
+        <span class="tag">Linux</span>
+        <span class="tag">Bash</span>
+        <span class="tag">Shell Script</span>
+        <span class="tag">C</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon icon-amber">⚙️</div>
+      <h3>Tools & Collab</h3>
+      <div class="skill-tags">
+        <span class="tag">Git</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">IntelliJ IDEA</span>
+        <span class="tag">VS Code</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon icon-blue">🔢</div>
+      <h3>Computer Science</h3>
+      <div class="skill-tags">
+        <span class="tag">자료구조</span>
+        <span class="tag">알고리즘</span>
+        <span class="tag">논리회로</span>
+        <span class="tag">OOP</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon icon-green">🗄️</div>
+      <h3>Data & UI</h3>
+      <div class="skill-tags">
+        <span class="tag">Java Swing</span>
+        <span class="tag">HashMap</span>
+        <span class="tag">File I/O</span>
+        <span class="tag">JSON</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon icon-amber">🌐</div>
+      <h3>Open Source</h3>
+      <div class="skill-tags">
+        <span class="tag">GitHub Flow</span>
+        <span class="tag">Pull Request</span>
+        <span class="tag">Markdown</span>
+        <span class="tag">README</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background: var(--paper2); max-width: 100%; padding: 6rem 3rem;">
+  <div style="max-width: 1100px; margin: 0 auto;">
+    <p class="section-label">What I've built</p>
+    <h2>프로젝트</h2>
+    <div class="projects-list">
+
+      <div class="project-card">
+        <div>
+          <div class="project-meta">
+            <span class="project-badge badge-main">팀 프로젝트</span>
+            <span class="project-badge badge-course">오픈소스SW기초</span>
+          </div>
+          <h3>BOSS — Baek-joon Online Self-grading System</h3>
+          <p>
+            백준 온라인 저지 문제를 기반으로 한 자동 채점 시스템. 학생이 코드를 제출하면 결과를 즉시 피드백하며,
+            Spring Boot와 Thymeleaf를 활용한 웹 인터페이스를 구성. 3인 팀의 팀장으로 백엔드 채점 로직 설계,
+            Gradle 빌드 환경 구성, GitHub README 작성을 담당.
+          </p>
+          <div class="project-tech">
+            <span class="tag">Java</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">Thymeleaf</span>
+            <span class="tag">Gradle</span>
+            <span class="tag">GitHub</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/YeongnamKwon" class="project-link" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-meta">
+            <span class="project-badge badge-course">Java 과제</span>
+          </div>
+          <h3>친구 정보 관리 프로그램</h3>
+          <p>
+            Java 콘솔 기반 친구 정보 관리 시스템. HashMap을 이용한 CRUD 기능, 파일 I/O를 통한 데이터 영속성,
+            Java Swing GUI, 성적 관리 기능을 포함. 객체지향 설계 원칙을 적용하여 구조화.
+          </p>
+          <div class="project-tech">
+            <span class="tag">Java</span>
+            <span class="tag">Swing GUI</span>
+            <span class="tag">HashMap</span>
+            <span class="tag">File I/O</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/YeongnamKwon" class="project-link" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div>
+          <div class="project-meta">
+            <span class="project-badge badge-hw">알고리즘 연습</span>
+          </div>
+          <h3>Baekjoon 문제풀이 (실습 1–4)</h3>
+          <p>
+            PCCE 및 백준 온라인 저지의 다양한 알고리즘 문제를 Java로 풀이. Scanner 기반 입출력,
+            자료구조 활용, 완전탐색 및 구현 문제 중심으로 코딩 역량 강화.
+          </p>
+          <div class="project-tech">
+            <span class="tag">Java</span>
+            <span class="tag">Algorithm</span>
+            <span class="tag">Data Structure</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/YeongnamKwon" class="project-link" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & TIMELINE -->
+<section id="education">
+  <p class="section-label">Background</p>
+  <h2>학력 및 이력</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">2023 — 현재</div>
+      <h3>컴퓨터공학부 (재학 중)</h3>
+      <p>학번: 2023212644 · 2학년</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2025</div>
+      <h3>오픈소스소프트웨어기초 (COM20925)</h3>
+      <p>3인 팀 팀장 · BOSS 프로젝트 기획 및 개발</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2025</div>
+      <h3>Java 프로그래밍 과제</h3>
+      <p>파일 I/O, Swing GUI, HashMap 기반 친구 정보 관리 시스템 구현</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2024 — 2025</div>
+      <h3>알고리즘 문제풀이</h3>
+      <p>백준 온라인 저지 다수 문제 해결 · Java 활용</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2024</div>
+      <h3>논리회로 수강</h3>
+      <p>풀 어더, Karnaugh Map, 플립플롭 등 디지털 논리 설계 학습</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <p class="section-label" style="color: rgba(255,255,255,0.4);">Get in touch</p>
+  <h2 style="font-family: 'DM Serif Display', serif; font-size: clamp(2rem,4vw,3rem); color: #fff; margin-bottom: 1rem;">함께 만들어가요</h2>
+  <p style="color: rgba(255,255,255,0.6); max-width: 480px; margin: 0 auto 2.5rem;">
+    개발 프로젝트 협업, 인턴십, 스터디 등 무엇이든 환영합니다.
+  </p>
+  <div class="contact-links">
+    <a href="https://github.com/YeongnamKwon" class="contact-link" target="_blank">GitHub</a>
+    <a href="mailto:your-email@example.com" class="contact-link">이메일</a>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Kwon Youngman · Built with HTML/CSS · Hosted on GitHub Pages</p>
+</footer>
+
+</body>
+</html>
